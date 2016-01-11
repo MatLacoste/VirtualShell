@@ -96,7 +96,7 @@ int internalCommands(Expression *e) {
     } else if(strcmp(e->arguments[0],"date") == 0) {
         myDate();
         return 1;
-    } else if(strcmp(e->arguments[0],"history") == 0) {
+    } else if(strcmp(e->arguments[0],"history") ==0){
         myHistory();
         return 1;
     } else if(strcmp(e->arguments[0],"pwd") == 0) {

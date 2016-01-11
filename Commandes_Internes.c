@@ -1,11 +1,17 @@
 #include "Commandes_Internes.h"
 
 
+
+int nbCommand = 0;
+
 void myEcho (char *sentence) {
 	printf ("%s\n", sentence);
 }
 
 void myDate () {
+	char JOURS[7][10] = {"dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"};
+	char MOIS[12][10] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "decembre"};
+
 	time_t t = time(NULL);
 	time_t gmt = 0;
 	time_t offset = mktime(gmtime(&gmt));
@@ -26,28 +32,12 @@ void myDate () {
 	printf("%s %d %s %d, %02d:%02d:%02d (UTC%c%02d%02d)\n", JOURS[tm.tm_wday], tm.tm_mday, MOIS[tm.tm_mon], tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec, positif, hours, min);	
 }
 
-void initHistory() {
-	int i;
-	for (i=0; i < NB_COMMAND_MAX; i++)
-		strcpy(COMMAND_LIST[i], " ");
-}
-
 void myHistory () {
-	int i;
-	for (i=0; i<NB_COMMAND; i++)
-		printf ("%d  %s\n", (i+1), COMMAND_LIST[i]);
-}
-
-void addCommand (char* newCommand) {
-	int i;
-	if (NB_COMMAND == NB_COMMAND_MAX) {
-		for (i=0; i<NB_COMMAND_MAX-1; i++)
-			 strcpy(COMMAND_LIST[i], COMMAND_LIST[i+1]);
-		strcpy(COMMAND_LIST[NB_COMMAND_MAX-1], newCommand);
-	} else {
-		strcpy(COMMAND_LIST[NB_COMMAND], newCommand);
-		NB_COMMAND++;
-	}
+	HIST_ENTRY **the_history_list =  history_list ();
+    int i;
+    for(i = 0; the_history_list[i] != NULL; i++) {
+		printf("%d  %s\n", i+1, the_history_list[i]->line);
+    }
 }
 
 char* myPwd () {
