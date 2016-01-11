@@ -122,6 +122,7 @@ int my_yyparse(void) {
 		snprintf(buffer, 1024, "mini_shell(%d):", status);
 		line = readline(buffer);
 		if(line != NULL) {
+			addCommand(line);
 			int ret;
 			add_history(line);              // Enregistre la line non vide dans l'historique courant
 			*strchr(line, '\0') = '\n';     // Ajoute \n à la line pour qu'elle puisse etre traité par le parseur
@@ -192,6 +193,8 @@ int my_yyparse(void) {
 
 
 int main (int argc, char **argv) {
+	
+	initHistory();
 
 	// faire en sorte qu'interactive_mode = 0 lorsque le shell est distant 
 
@@ -207,7 +210,6 @@ int main (int argc, char **argv) {
 			fflush(stdout);
 			
 			evaluerExpr(ExpressionAnalysee,0,1,2);
-			//TO DO
 			
 			expression_free(ExpressionAnalysee);
 		} else {
