@@ -3,6 +3,7 @@
 #include "Shell.h"
 #include <unistd.h>
 #include <string.h>
+#include <time.h>
 
 #define NB_COMMAND_MAX 50
 
