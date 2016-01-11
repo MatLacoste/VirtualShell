@@ -1,6 +1,6 @@
 LEX 	= flex
 YACC 	= yacc -d -v
-CC	= gcc -std=c99 -g -D_XOPEN_SOURCE=700 
+CC	= gcc -std=c99 -g -D_XOPEN_SOURCE=700 -ltermcap
 
 
 Shell: Shell.o Affichage.o Evaluation.o Commandes_Internes.o y.tab.o lex.yy.o

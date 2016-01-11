@@ -1,13 +1,21 @@
 #ifndef ANALYSE
 #define ANALYSE
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdio.h>
+#include <fcntl.h>
+#include <sys/wait.h>
+
+#include <readline/readline.h>
+#include <readline/history.h>
 
 #define NB_ARGS 50
 #define TAILLE_ID 500
+
+#define BY_PID_ID 1
+#define BY_PROCESS_ID 2
 
 typedef enum expr_t {
   VIDE,	         		// Commande vide 
@@ -26,11 +34,12 @@ typedef enum expr_t {
 } expr_t;
 
 typedef struct Expression {
-  expr_t type;
-  struct Expression *gauche;
-  struct Expression *droite;
-  char   **arguments;
+	expr_t type;
+	struct Expression *gauche;
+	struct Expression *droite;
+	char   **arguments;
 } Expression;
+
 
 extern int yyparse(void);
 Expression *ConstruireNoeud (expr_t, Expression *, Expression *, char **);
@@ -42,4 +51,8 @@ void EndOfFile(void);
 void yyerror (char *s);
 Expression *ExpressionAnalysee;
 extern int status;
+
+void quit(int);
+
+
 #endif /* ANALYSE */

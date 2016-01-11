@@ -27,7 +27,7 @@ void myDate () {
 	printf("%s %d %s %d, %02d:%02d:%02d (UTC%c%02d%02d)\n", JOURS[tm.tm_wday], tm.tm_mday, MOIS[tm.tm_mon], tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec, positif, hours, min);	
 }
 
-int nb_command () {
+int nbCommand () {
 	int i=0;
 	int cpt =0;
 	for (i =0; i < NB_COMMAND_MAX; i++)
@@ -38,7 +38,7 @@ int nb_command () {
 
 void myHistory () {
 	int i;
-	int nb = nb_command ();
+	int nb = nbCommand ();
 
 	for (i=0; i<nb; i++)
 			printf ("%d  %s\n", (i+1), COMMAND_LIST[i]);
@@ -46,13 +46,13 @@ void myHistory () {
 
 void addCommand (char* newCommand) {
 	int i;
-	if (nb_command () == NB_COMMAND_MAX) {
+	if (nbCommand () == NB_COMMAND_MAX) {
 		for (i=0; i<NB_COMMAND_MAX-1; i++) {
 			 strcpy(COMMAND_LIST[i], COMMAND_LIST[i+1]);
 		}
 		strcpy(COMMAND_LIST[NB_COMMAND_MAX-1], newCommand);
 	} else {
-		strcpy(COMMAND_LIST[nb_command()], newCommand);
+		strcpy(COMMAND_LIST[nbCommand()], newCommand);
 	}
 }
 
@@ -63,13 +63,9 @@ char* myPwd () {
 }
 
 void myCd (char* name) {
-	char* pwd = myPwd ();
-	strcat (pwd, "/");
-	strcat (pwd, name);
-	if (chdir (pwd) == -1)
-		printf ("Le dossier %s n'existe pas\n", name);
-	else
-		printf ("Vous êtes entré dans le dossier %s\n", name);
+	if (name != NULL)
+		chdir(name);
+	else chdir(getenv("HOME"));
 }
 
 char* myHostname () {
@@ -78,3 +74,11 @@ char* myHostname () {
 	return hostname;
 }
 
+void myKill(char *pid) {
+	if(pid != NULL)
+    	kill(pid, SIGKILL);
+}
+
+void myExit() {
+	exit(EXIT_SUCCESS);
+}

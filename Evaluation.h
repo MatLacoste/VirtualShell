@@ -1,8 +1,17 @@
 #ifndef _EVALUATION_H
 #define _EVALUATION_H
 
-#include "Shell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/wait.h>
 
-extern int evaluer_expr(Expression *e);
+#include <readline/readline.h>
+#include <readline/history.h>
+
+extern int evaluerExpr(Expression *, int, int, int);
+extern int internalCommands(Expression *);
 
 #endif
