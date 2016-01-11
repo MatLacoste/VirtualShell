@@ -6,15 +6,18 @@ void myEcho (char *sentence) {
 
 void myDate () {
 	time_t t = time(NULL);
+	time_t gmt = 0;
+	time_t offset = mktime(gmtime(&gmt));
 	struct tm tm = *localtime(&t);
-	int hours = tm.tm_gmtoff/3600;
-	int min = tm.tm_gmtoff - (hours*3600);
+
+	int hours = offset/3600;
+	int min = (offset-(hours*3600))/60;
 	char positif;
 
 	if (hours > 0) { 
-		positif = '+';
-	} else {
 		positif = '-';
+	} else {
+		positif = '+';
 		hours *= -1;
 		min *= -1;
 	}
