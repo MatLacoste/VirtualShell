@@ -14,8 +14,6 @@
 #define NB_ARGS 50
 #define TAILLE_ID 500
 
-#define BY_PID_ID 1
-#define BY_PROCESS_ID 2
 
 typedef enum expr_t {
   VIDE,	         		// Commande vide 
@@ -30,7 +28,7 @@ typedef enum expr_t {
   REDIRECTION_A, 		// Redirection sortie standard, mode append 
   REDIRECTION_E, 		// Redirection sortie erreur 
   REDIRECTION_EO,		// Redirection sorties erreur et standard
-  SOUS_SHELL,                   // ( shell ) 
+  SOUS_SHELL,           // ( shell ) 
 } expr_t;
 
 typedef struct Expression {

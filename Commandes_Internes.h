@@ -7,13 +7,13 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-void  myEcho (char *);
-void  myDate ();
-void  myHistory();
-char* myPwd ();
-void  myCd (char *);
-char* myHostname ();
-void  myKill(char *);
-void  myExit();
+int myEcho (char *);
+int myDate ();
+int myHistory();
+int myPwd ();
+int myCd (char *);
+int myHostname ();
+int myKill(char *);
+int myExit();
 
 #endif

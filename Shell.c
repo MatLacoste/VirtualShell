@@ -205,9 +205,7 @@ int main (int argc, char **argv) {
 		if (my_yyparse () == 0) {  /* L'analyse a abouti */   
 			afficher_expr(ExpressionAnalysee);
 			fflush(stdout);
-			
-			evaluerExpr(ExpressionAnalysee,0,1,2);
-			
+			evaluerExpr(ExpressionAnalysee,NULL,0,1,2);			
 			expression_free(ExpressionAnalysee);
 		} else {
 			/* L'analyse de la ligne de commande a donné une erreur */

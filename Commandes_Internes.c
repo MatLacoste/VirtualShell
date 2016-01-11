@@ -1,14 +1,11 @@
 #include "Commandes_Internes.h"
 
-
-
-int nbCommand = 0;
-
-void myEcho (char *sentence) {
+int myEcho (char *sentence) {
 	printf ("%s\n", sentence);
+	return 1;
 }
 
-void myDate () {
+int myDate () {
 	char JOURS[7][10] = {"dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"};
 	char MOIS[12][10] = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "novembre", "decembre"};
 
@@ -29,40 +26,47 @@ void myDate () {
 		min *= -1;
 	}
 
-	printf("%s %d %s %d, %02d:%02d:%02d (UTC%c%02d%02d)\n", JOURS[tm.tm_wday], tm.tm_mday, MOIS[tm.tm_mon], tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec, positif, hours, min);	
+	printf("%s %d %s %d, %02d:%02d:%02d (UTC%c%02d%02d)\n", JOURS[tm.tm_wday], tm.tm_mday, MOIS[tm.tm_mon], tm.tm_year + 1900, tm.tm_hour, tm.tm_min, tm.tm_sec, positif, hours, min);
+	return 1;
 }
 
-void myHistory () {
+int myHistory () {
 	HIST_ENTRY **the_history_list =  history_list ();
     int i;
     for(i = 0; the_history_list[i] != NULL; i++) {
 		printf("%d  %s\n", i+1, the_history_list[i]->line);
     }
+    return 1;
 }
 
-char* myPwd () {
+int myPwd () {
 	char cwd[1024];
 	getcwd (cwd, sizeof(cwd));
-	return cwd;
+	printf("%s\n",cwd);
+	return 1;
 }
 
-void myCd (char* name) {
+int myCd (char* name) {
 	if (name != NULL)
 		chdir(name);
 	else chdir(getenv("HOME"));
+	return 1;
 }
 
-char* myHostname () {
+int myHostname () {
 	char hostname[1024];
 	gethostname (hostname, sizeof (hostname));
-	return hostname;
+	printf("%s\n", hostname);
+	return 1;
 }
 
-void myKill(char *pid) {
-	if(pid != NULL)
+int myKill(char *pid) {
+	if(pid != NULL) {
     	kill(pid, SIGKILL);
+		return 1;
+	} else return 0;
 }
 
-void myExit() {
+int myExit() {
 	exit(EXIT_SUCCESS);
 }

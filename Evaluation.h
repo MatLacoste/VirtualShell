@@ -11,7 +11,22 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-extern int evaluerExpr(Expression *, int, int, int);
+typedef struct process {
+	int id;
+	char* name;
+	pid_t pid;
+	struct t_process* next;
+} t_process;
+
+static t_process* processList = NULL;
+
+extern int evaluerExpr(Expression *, t_process* ,int, int, int);
 extern int internalCommands(Expression *);
+
+t_process* insertProcess(char*);
+t_process* deleteProcess(char*);
+void printProcess();
+
+void cmdProcess(char*, char*[]);
 
 #endif
